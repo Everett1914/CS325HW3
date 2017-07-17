@@ -77,11 +77,16 @@ def makeChange(coinSet, value):
 
     for j in range(len(coinSet)):
         for i in range(1, value + 1):
-            if numCoins[i] > (1 + numCoins[i - coinSet[j]]):
-                numCoins[i] = (1 + numCoins[i - coinSet[j]])
-                coinsUsed[i] = j
+            if i >= coinSet[j]:  #avoids index errors
+                if numCoins[i] > (1 + numCoins[i - coinSet[j]]):
+                    numCoins[i] = (1 + numCoins[i - coinSet[j]])
+                    coinsUsed[i] = j
 
     coins=buildCoinsArr(coinsUsed,coinSet)
     return numCoins[-1], coins
 
-readWriteArray()
+def main():
+    readWriteArray()
+
+if __name__ == "__main__":
+    main()
